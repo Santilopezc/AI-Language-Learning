@@ -44,7 +44,7 @@ class LanguageProcessor:
             Keep your response concise and friendly."""
 
             response = openai.chat.completions.create(
-                model="gpt-4",
+                model="gpt-4o-mini",
                 messages=[
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": message}
@@ -63,7 +63,7 @@ class LanguageProcessor:
             Provide only the direct translation, no explanations."""
 
             response = openai.chat.completions.create(
-                model="gpt-4",
+                model="gpt-4o-mini",
                 messages=[
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": message}

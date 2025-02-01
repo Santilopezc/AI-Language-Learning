@@ -18,8 +18,8 @@ class ChatState:
             st.session_state.translations = {}
         if "audio_bytes" not in st.session_state:
             st.session_state.audio_bytes = None
-        if "processed_audio" not in st.session_state:
-            st.session_state.processed_audio = False
+        if "prev_audio" not in st.session_state:
+            st.session_state.prev_audio = None
         if "last_message_count" not in st.session_state:
             st.session_state.last_message_count = 0
 
@@ -48,7 +48,8 @@ class ChatState:
             "German",
             "Italian",
             "Japanese",
-            "Mandarin Chinese"
+            "Mandarin Chinese",
+            "Polish"
         ]
 
     @staticmethod
