@@ -4,7 +4,7 @@ A Python-based language learning application that lets you practice different la
 
 ## Features
 
-- Support for multiple languages (Spanish, French, German, Italian, Japanese, Mandarin Chinese)
+- Support for multiple languages (Spanish, French, German, Italian, Japanese, Mandarin Chinese, Polish)
 - Two chat modes:
   - Free Conversation: Chat about any topic you want
   - Role Play: Practice specific scenarios like ordering at a restaurant or buying train tickets
