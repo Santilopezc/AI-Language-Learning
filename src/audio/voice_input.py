@@ -19,7 +19,8 @@ class VoiceProcessor:
         "Italian": "it",
         "Japanese": "ja",
         "Mandarin Chinese": "zh",
-        "Polish": "pl"
+        "Polish": "pl",
+        "Russian": "ru"
     }
 
     def __init__(self):

@@ -49,7 +49,8 @@ class ChatState:
             "Italian",
             "Japanese",
             "Mandarin Chinese",
-            "Polish"
+            "Polish",
+            "Russian"
         ]
 
     @staticmethod
