@@ -57,26 +57,22 @@ class ChatUI:
                     st.markdown(f"**English:** {st.session_state.translations[message_key]}")
 
     def handle_audio_input(self):
-        """Handle audio recording and transcription."""
         audio = self.voice_processor.get_audio_recorder()
         
-        # Only process new audio input
-        if (audio and not st.session_state.processed_audio and 
-            audio['bytes'] != st.session_state.audio_bytes):
+        if audio and audio.get('bytes') and audio['bytes'] != st.session_state.get('prev_audio'):
             st.session_state.audio_bytes = audio['bytes']
-            st.session_state.processed_audio = True
             
             with st.spinner("Transcribing audio..."):
                 transcribed_text = self.voice_processor.transcribe_audio(
                     st.session_state.audio_bytes
                 )
                 if transcribed_text:
+                    # Update state BEFORE rerun
+                    st.session_state.prev_audio = audio['bytes']
+                    st.session_state.audio_bytes = None
+                    
                     self.handle_new_message(transcribed_text, is_voice=True)
-                    st.rerun()
-            
-            # Reset audio state
-            st.session_state.audio_bytes = None
-            st.session_state.processed_audio = False
+                    st.rerun()  # Now safe to rerun
 
     def handle_new_message(self, message_content, is_voice=False):
         """Handle a new message from either voice or text input."""
