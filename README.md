@@ -36,3 +36,11 @@ The app will open in your default web browser. From there, you can:
 1. Select your target language
 2. Choose between free conversation or role-play mode
 3. Start chatting and practicing!
+
+## To-Do
+- [ ] Add TTS for AI
+- [ ] Make option to check spoken message in chat before sending it
+- [ ] Add an image to the AI
+- [ ] Make a chat history
+- [ ] Make an account system
+- [ ] Add a summary report
