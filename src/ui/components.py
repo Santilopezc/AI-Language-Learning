@@ -1,9 +1,10 @@
 import streamlit as st
 
 class ChatUI:
-    def __init__(self, language_processor, voice_processor):
+    def __init__(self, language_processor, voice_processor, tts_processor):
         self.language_processor = language_processor
         self.voice_processor = voice_processor
+        self.tts_processor = tts_processor()
         self._init_session_state()
 
     def _init_session_state(self):
@@ -19,6 +20,11 @@ class ChatUI:
         """Display a chat message with its buttons and expandable sections."""
         with st.chat_message(message["role"]):
             st.write(message["content"])
+
+            # Play audio if this is the message that needs it
+            if message_key == st.session_state.message_to_play:
+                self.tts_processor.autoplay_audio("src/audio/output.mp3")
+                st.session_state.message_to_play = None
             col1, col2, col3 = st.columns([4, 1, 1])
             
             # Add correction button only for user messages
@@ -94,12 +100,16 @@ class ChatUI:
         if ai_response:
             st.session_state.messages.append({"role": "assistant", "content": ai_response})
             st.session_state.last_message_count = len(st.session_state.messages)
+            self.tts_processor.text_to_voice(ai_response)
+            st.session_state.message_to_play = f"msg_{st.session_state.last_message_count - 1}"
+            
 
     def display_chat_interface(self):
         """Display the main chat interface."""
         st.header(f"Chatting in {st.session_state.target_language}")
         if st.session_state.chat_mode == "Role Play":
             st.subheader(f"Scenario: {st.session_state.role_play_scenario}")
+
 
         # Display chat messages
         for i, message in enumerate(st.session_state.messages):
@@ -113,4 +123,3 @@ class ChatUI:
         if prompt := st.chat_input("Type your message..."):
             self.handle_new_message(prompt)
             st.rerun()
-

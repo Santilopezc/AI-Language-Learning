@@ -22,6 +22,8 @@ class ChatState:
             st.session_state.prev_audio = None
         if "last_message_count" not in st.session_state:
             st.session_state.last_message_count = 0
+        if "message_to_play" not in st.session_state:
+            st.session_state.message_to_play = None
 
     @staticmethod
     def clear_state():

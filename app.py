@@ -1,10 +1,12 @@
 import streamlit as st
 from src.audio.voice_input import VoiceProcessor
+from src.audio.voice_ouput import tts_processor
 from dotenv import load_dotenv
 import os
 from src.language.language_processor import LanguageProcessor
 from src.ui.components import ChatUI
 from src.chat.message_handler import ChatState
+
 
 # Load environment variables
 load_dotenv()
@@ -24,7 +26,7 @@ def main():
     # Initialize components
     language_processor = LanguageProcessor(api_key)
     voice_processor = VoiceProcessor()  # Add this line
-    chat_ui = ChatUI(language_processor, voice_processor)  # Update this line
+    chat_ui = ChatUI(language_processor, voice_processor, tts_processor)  # Update this line
 
     # Language selection
     if not st.session_state.target_language:
@@ -59,7 +61,10 @@ def main():
                 )
                 if initial_response:
                     st.session_state.messages.append({"role": "assistant", "content": initial_response})
+                    chat_ui.tts_processor.text_to_voice(initial_response)
+                    st.session_state.message_to_play = f"msg_{st.session_state.last_message_count}"
             st.rerun()
+  
 
     # Chat interface
     else:
