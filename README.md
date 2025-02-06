@@ -38,7 +38,7 @@ The app will open in your default web browser. From there, you can:
 3. Start chatting and practicing!
 
 ## To-Do
-- [ ] Add TTS for AI
+- [x] Add TTS for AI
 - [ ] Make option to check spoken message in chat before sending it
 - [ ] Add an image to the AI
 - [ ] Make a chat history
